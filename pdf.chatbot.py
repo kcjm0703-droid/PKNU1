@@ -29,18 +29,13 @@ if api_key and uploaded_file and st.session_state.vector_store_id is None:
 
     client = OpenAI(api_key=api_key)
 
-    file = client.files.create(
-        file=uploaded_file,
-        purpose="assistants"
-    )
-
     vector_store = client.vector_stores.create(
         name="pdf_store"
     )
 
-    client.vector_stores.files.create(
+    client.vector_stores.files.upload_and_poll(
         vector_store_id=vector_store.id,
-        file_id=file.id
+        file=uploaded_file
     )
 
     st.session_state.vector_store_id = vector_store.id

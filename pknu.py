@@ -70,3 +70,4 @@ if st.button("질문하기"):
 
         st.success("응답 완료!")
         st.write(answer)
+streamlit run app.py
